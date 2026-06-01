@@ -1,0 +1,19 @@
+[Unit]
+Description=NordVPN Dashboard (Flask)
+After=network.target nordvpnd.service
+Wants=nordvpnd.service
+
+[Service]
+Type=simple
+User=root
+Environment=HOME=/root
+Environment=VPN_DASH_PORT=8080
+ExecStart=/opt/vpn-dashboard-venv/bin/python3 /opt/vpn-dashboard/app.py
+WorkingDirectory=/opt/vpn-dashboard
+Restart=always
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
